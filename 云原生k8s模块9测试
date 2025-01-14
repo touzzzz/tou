@@ -1,0 +1,22 @@
+ADBBD ACBDC DABDC CACAB ADACA CBACC ABBDB CABCB  
+AAABA ABAAB AAAAA AAAAB
+kube-apiserver：API 服务器是 Kubernetes 控制平面的组件， 该组件负责公开了 Kubernetes API，负责处理接受请求的工作。 API 服务器是 Kubernetes 控制平面的前端
+
+etcd：一致且高可用的键值存储，用作 Kubernetes 所有集群数据的后台数据库。
+
+kube-scheduler：kube-scheduler 是控制平面的组件， 负责监视新创建的、未指定运行节点（node）的 Pods， 并选择节点来让 Pod 在上面运行。
+
+kube-controller-manager：kube-controller-manager 是控制平面的组件， 负责运行控制器进程
+
+kubelet：kubelet 会在集群中每个节点（node）上运行。 它保证容器（containers）都运行在 Pod 中。kubelet 不会管理不是由 Kubernetes 创建的容器
+
+kube-proxy：kube-proxy 是集群中每个节点（node）上所运行的网络代理， 实现 Kubernetes 服务（Service） 概念的一部分。
+
+Pod 遵循预定义的生命周期，起始于 Pending 阶段， 如果至少其中有一个主要容器正常启动，则进入 Running，之后取决于 Pod 中是否有容器以失败状态结束而进入 Succeeded 或者 Failed 阶段。
+
+1.	创建阶段：创建新的pod时，k8s首先会检查使用的容器镜像是否存在，并检查pod是否配置正确，如果一切正常，则k8s会创建一个pod，此时pod处于pending状态
+2.	运行阶段：一旦pod处于pending状态，K8s就会开始为它分配资源并启动容器，当所有容器启动成功后，pod就会处于running状态
+3.	容器故障恢复阶段：在运行期间，如果某个容易意外终止，则k8s将自动重启该容器，如果重启不成功，则pod就进如 Failed状态
+4.	更新阶段：可以通过更新Pod的定义文件，并使用Kubernetes的滚动更新机制来逐步更新Pod。滚动更新可以确保在更新过程中不中断服务
+5.	删除阶段：当pod不再需要时，可以通过删除pod对象来释放资源
+
